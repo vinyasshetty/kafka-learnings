@@ -66,3 +66,25 @@ To describe  a topic :
 
 
 
+# Kafka Producer
+
+Below will let you write data to kafka topics,now kafka internally through some logic will decide to which of the 3 partitions of test1 topic should each line that you type should go into.
+
+`kafka-console-producer --broker-list 127.0.0.1:9092 --topic test1`
+
+
+
+# Kafka Consumer
+
+Below will let you read data from Kafka Topic.Below command will not read anything.Reason Being a Kafka Consumer will always read from the end of the Topic by default.
+
+`kafka-console-consumer --bootstrap-server 127.0.0.1:9092 --topic test1 `
+
+Too Read from begining :
+
+`kafka-console-consumer --bootstrap-server 127.0.0.1:9092 --topic test1  --from-beginning`
+
+
+
+
+
