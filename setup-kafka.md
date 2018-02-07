@@ -56,3 +56,15 @@ I am creating a topic called "test1" by connecting to the zookeeper with replica
 
 **Kafka will ALLOW only Number of Replication Factor  &lt;= Number of Brokers**
 
+To Look  at the List of existing Topics :
+
+`kafka-topics --zookeeper 127.0.0.1:2181 --list`
+
+To describe  a topic :
+
+`kafka-topics --zookeeper 127.0.0.1:2181 --describe --topic test1`
+
+
+
+
+
