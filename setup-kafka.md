@@ -10,27 +10,25 @@ Then on Terminal:
 
 `docker run --rm -it \`
 
-`           -p 2181:2181 -p 3030:3030 -p 8081:8081 \`
+`-p 2181:2181 -p 3030:3030 -p 8081:8081 \`
 
-`           -p 8082:8082 -p 8083:8083 -p 9092:9092 \`
+`-p 8082:8082 -p 8083:8083 -p 9092:9092 \`
 
-`           -e ADV_HOST=127.0.0.1 \`
+`-e ADV_HOST=127.0.0.1 \`
 
-`           landoop/fast-data-dev`
+`landoop/fast-data-dev`
 
 \# Docker toolbox
 
 `docker run --rm -it \`
 
-`          -p 2181:2181 -p 3030:3030 -p 8081:8081 \`
+`-p 2181:2181 -p 3030:3030 -p 8081:8081 \`
 
-`          -p 8082:8082 -p 8083:8083 -p 9092:9092 \`
+`-p 8082:8082 -p 8083:8083 -p 9092:9092 \`
 
-`          -e ADV_HOST=192.168.99.100 \`
+`-e ADV_HOST=192.168.99.100 \`
 
-`          landoop/fast-data-dev`
-
-
+`landoop/fast-data-dev`
 
 \# Kafka command lines tools\(In a Separate Terminal\)
 
@@ -38,5 +36,25 @@ Then on Terminal:
 docker run --rm -it --net=host landoop/fast-data-dev bash
 ```
 
-This will run with only one Broker.
+This will run with only one Broker.This will create a bash shell when you can run kafka commands.
+
+If you are using non docker then  kafka/bin you will have the shell scripts instead of commands.
+
+I will continue to use docker.
+
+Once you run above go to:
+
+http://127.0.0.1:3030
+
+In a different Terminal Say:
+
+`kafka-topics --create --zookeeper 127.0.0.1:2181 --replication-factor 1 --topic test1 --partitions 3`
+
+I am creating a topic called "test1" by conecting to the zookeeper with replication factor 1.Since i have one broker only ,so i cannot create more then 1 replication factor.ie 
+
+**Kafka will ALLOW only Number of Replication Factor  &lt;= Number of Brokers**
+
+
+
+
 
