@@ -44,17 +44,15 @@ I will continue to use docker.
 
 Once you run above go to:
 
-http://127.0.0.1:3030
+[http://127.0.0.1:3030](http://127.0.0.1:3030)
+
+# **Creating a Kafka Topic **
 
 In a different Terminal Say:
 
 `kafka-topics --create --zookeeper 127.0.0.1:2181 --replication-factor 1 --topic test1 --partitions 3`
 
-I am creating a topic called "test1" by conecting to the zookeeper with replication factor 1.Since i have one broker only ,so i cannot create more then 1 replication factor.ie 
+I am creating a topic called "test1" by connecting to the zookeeper with replication factor 1.Since i have one broker only ,so i cannot create more then 1 replication factor.ie
 
 **Kafka will ALLOW only Number of Replication Factor  &lt;= Number of Brokers**
-
-
-
-
 
