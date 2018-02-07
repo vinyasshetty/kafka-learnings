@@ -11,9 +11,9 @@ Kafka does NOT gurantee the message write/read order is maintained across the to
 
 Kafka clients come in two flavours: producer and consumer. Each of these can be configured to different levels of consistency.
 
-For a producer we have three choices. On each message we can \(1\) wait for all in sync replicas to acknowledge the message, \(2\) wait for only the leader to acknowledge the message, or \(3\) do not wait for acknowledgement. Each of these methods have their merits and drawbacks and it is up to the system implementer to decide on the appropriate strategy for their system based on factors like consistency and throughput.
+**For a producer **we have three choices. On each message we can \(1\) wait for all in sync replicas to acknowledge the message\(acks=all/-1\), \(2\) wait for only the leader to acknowledge the message\(acks=1\), or \(3\) do not wait for acknowledgement\(acks=0\). Each of these methods have their merits and drawbacks and it is up to the system implementer to decide on the appropriate strategy for their system based on factors like consistency and throughput.
 
-On the consumer side, we can only ever read committed messages \(i.e., those that have been written to all in sync replicas\). Given that, we have three methods of providing consistency as a consumer: \(1\) receive each message at most once, \(2\) receive each message at least once, or \(3\) receive each message exactly once. Each of these scenarios deserves a discussion of its own.
+**On the consumer side**, we can only ever read committed messages \(i.e., those that have been written to all in sync replicas\). Given that, we have three methods of providing consistency as a consumer: \(1\) receive each message at most once, \(2\) receive each message at least once, or \(3\) receive each message exactly once. Each of these scenarios deserves a discussion of its own.
 
 For at most once message delivery, the consumer reads data from a partition, commits the offset that it has read, and then processes the message. If the consumer crashes between committing the offset and processing the message it will restart from the next offset without ever having processed the message. This would lead to potentially undesirable message loss.
 
