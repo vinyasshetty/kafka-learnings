@@ -16,7 +16,7 @@ These partitions are spread across multiple machines/Node .A single partitions C
 
 These partitions are also replicated on different nodes.Each message in a partition will get a unique increasing sequence number.
 
- ![](https://kafka.apache.org/10/images/log_anatomy.png)
+![](https://kafka.apache.org/10/images/log_anatomy.png)
 
 So each message is identified in Kafka by the given topic,the partition and the correspoding sequence Number.
 
@@ -33,4 +33,12 @@ p2 replicas will be in N1 and N3.Here N2 is the Leader for Partition p2.
 p3 replicas will be in N1 and N1.Here N3 is the Leader for Partition p3.
 
 Client will interact only with the Leader Node for a given partition.
+
+We have something called as Consumer Group.These consists of Consumers.
+
+One Partition cannot be read by two or more consumers beloginging to a Consumer Group.This is will avoid duplication.
+
+So for a given consumer group,the number of consumers can be less or equal to the number of partitions for a given topic.
+
+
 
