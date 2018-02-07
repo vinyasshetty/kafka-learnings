@@ -6,13 +6,13 @@ To overcome that we have Kafka which acts as a intermediate layer where all upst
 
 Kafka is a fast,distributed,highly scalable,higly available,publish-subscribe messaging system.
 
-
-
 What Kafka Doent Do:
 
-* No Encryption or authentication .
+* No Encryption or authentication of/on data on Kafka.
 * We need to write Consumer or Producers to move data out or into Kafka
 * No data transformation.Data once written to Kafka is immutable.
+
+
 
 
 
