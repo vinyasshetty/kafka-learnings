@@ -64,27 +64,27 @@ To describe  a topic :
 
 `kafka-topics --zookeeper 127.0.0.1:2181 --describe --topic test1`
 
-
-
 # Kafka Producer
 
 Below will let you write data to kafka topics,now kafka internally through some logic will decide to which of the 3 partitions of test1 topic should each line that you type should go into.
 
 `kafka-console-producer --broker-list 127.0.0.1:9092 --topic test1`
 
-
-
 # Kafka Consumer
 
 Below will let you read data from Kafka Topic.Below command will not read anything.Reason Being a Kafka Consumer will always read from the end of the Topic by default.
 
-`kafka-console-consumer --bootstrap-server 127.0.0.1:9092 --topic test1 `
+`kafka-console-consumer --bootstrap-server 127.0.0.1:9092 --topic test1`
 
 Too Read from begining :
 
 `kafka-console-consumer --bootstrap-server 127.0.0.1:9092 --topic test1  --from-beginning`
 
+To Read from a Particular Partition and a particular sequence \#:
 
+`kafka-console-consumer --bootstrap-server 127.0.0.1:9092 --topic test1 --partition 0 --offset 0`
 
+To Read from a Particular Partition:
 
+`kafka-console-consumer --bootstrap-server 127.0.0.1:9092 --topic test1 --partition 0 --from-beginning`
 
