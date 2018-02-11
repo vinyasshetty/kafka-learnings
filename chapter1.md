@@ -4,7 +4,7 @@ We have multiple upstreams sending data to multiple downstreams and this gets to
 
 To overcome that we have Kafka which acts as a intermediate layer where all upstreams send data to Kafka and all downstreams read data from Kafka.
 
-This causes complete decoupling ie Upstreams\(Publishers\) dont need to know anything about downstreams\(Subscribers\)
+This causes complete decoupling ie Upstreams\(Publishers\) dont need to know anything about downstreams\(Subscribers\).
 
 Kafka is a fast,distributed,highly scalable,higly available,publish-subscribe messaging system.
 
