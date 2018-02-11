@@ -15,3 +15,19 @@
 
 
 
+## Producer
+
+To Create a Producer via API:
+
+First have java.util.Properties and set below properties.
+
+p.setProperty\("bootstrap.server","127.0.0.1:9092"\)
+
+p.setProperty\("key.serializer","org.apache.kafka.common.serializer.StringSerializer"\)
+
+p.setProperty\("value.serializer","org.apache.kafka.common.serializer.StringSeriailzer"\)
+
+p.setProperty\("acks","1"\)  // Possible values \[all, -1, 0, 1\]. all/-1 means Producer will wait for ack until all the replication is done successfully.0 Producer does not wait for ack and 1 means Producer waits for ack only until data is reached successfully to leader broker partition.See The docs for how this impacts on retries variable.
+
+
+
