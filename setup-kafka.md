@@ -70,6 +70,8 @@ Below will let you write data to kafka topics,now kafka internally through some 
 
 `kafka-console-producer --broker-list 127.0.0.1:9092 --topic test1`
 
+**` Messages sent to a same topic needs to have same schema `**
+
 # Kafka Consumer
 
 Below will let you read data from Kafka Topic.Below command will not read anything.Reason Being a Kafka Consumer will always read from the end of the Topic by default.
