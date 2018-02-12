@@ -2,6 +2,16 @@ Kafka -&gt; config/server.properties has the broker.id which needs to be unique.
 
 This has the zookeeper address.Log directories etc.
 
+Non Docker:
+
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+bin/kafka-server-start.sh config/server\_1.properties
+
+bin/kafka-server-start.sh config/server.properties
+
+
+
 For us to set up via docker .Set up Docker first.
 
 Then on Terminal:
@@ -70,7 +80,7 @@ Below will let you write data to kafka topics,now kafka internally through some 
 
 `kafka-console-producer --broker-list 127.0.0.1:9092 --topic test1`
 
-**` Messages sent to a same topic needs to have same schema `**
+`Messages sent to a same topic needs to have same schema`
 
 # Kafka Consumer
 
