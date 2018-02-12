@@ -2,6 +2,8 @@ Kafka runs on a Cluster.The nodes in the Cluster are called as Brokers.
 
 Data that you send or read from Kafka are called as "Messages".Each Message has a Key,Value and TimeStamp.
 
+Message is the unit of data in Kafka and it resembles to record/row in RDBMS world.
+
 Messages are written to a Topic in a Kafka.
 
 Think of a Topic as a database ,we can create our own Topic and then write messages/data to these topics.
