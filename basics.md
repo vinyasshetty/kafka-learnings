@@ -42,7 +42,9 @@ We have something called as Consumer Group.These consists of Consumers.
 
 One Partition cannot be read by two or more consumers beloginging to a Consumer Group.This is will avoid duplication.
 
-The _offset_ is another bit of metadata—an integer value that continually increases—that Kafka adds to each message as it is produced. Each message in a given partition has a unique offset. By storing the offset of the last consumed message for each partition, either in Zookeeper or in Kafka itself, a consumer can stop and restart without losing its place.
+The _offset_ is another bit of metadata—an integer value that continually increases—that Kafka adds to each message as it is produced. Each message in a given partition has a unique offset. By storing the offset of the **last consumed message for each partition**, either in Zookeeper or in Kafka itself, a consumer can stop and restart without losing its place.
+
+Its the broker which receives the message that assigns offset to the message.
 
 So for a given consumer group,the number of consumers can be less or equal to the number of partitions for a given topic.
 
