@@ -12,6 +12,8 @@ Consumers are something that will read data from a Topic.This is Pull based.
 
 Topic is split into multiple Partitions.Data when you write into a Topic will go into one of the partition of the topic.
 
+The records in the partitions are each assigned a sequential id number called the offset that uniquely identifies each record within the partition.
+
 These partitions are spread across multiple machines/Node .A single partitions CANNOT be split into different nodes.
 
 These partitions are also replicated on different nodes.Each message in a partition will get a unique increasing sequence number.
