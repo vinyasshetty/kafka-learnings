@@ -1,6 +1,6 @@
 Kafka runs on a Cluster.The nodes in the Cluster are called as Brokers.
 
-Data that you send or read from Kafka are called as "Messages".
+Data that you send or read from Kafka are called as "Messages".Each Message has a Key,Value and TimeStamp.
 
 Messages are written to a Topic in a Kafka.
 
@@ -39,6 +39,4 @@ We have something called as Consumer Group.These consists of Consumers.
 One Partition cannot be read by two or more consumers beloginging to a Consumer Group.This is will avoid duplication.
 
 So for a given consumer group,the number of consumers can be less or equal to the number of partitions for a given topic.
-
-
 
