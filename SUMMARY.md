@@ -7,4 +7,5 @@
 * [Guarantees Of Kafka](gurantees-of-kafka.md)
 * [Kafka Information](kafka-information.md)
 * [Producer](producer.md)
+* [Avro](avro.md)
 
