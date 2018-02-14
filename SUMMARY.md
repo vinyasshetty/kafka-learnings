@@ -8,4 +8,5 @@
 * [Kafka Information](kafka-information.md)
 * [Producer](producer.md)
 * [Avro](avro.md)
+* [Schema Registry](schema-registry.md)
 
