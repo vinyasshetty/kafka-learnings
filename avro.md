@@ -176,3 +176,14 @@ GETTING DATA:
 
 If you get a non existing column ,then u will get null.
 
+
+
+* ## Suggestion While Creating Avro :
+* Make Primary fileds mandatory ie non union.
+* Make sure symbols in enum are not changing else schema will break.
+* Always make sure you have default values for schema evolution.
+* Aliases can be used for renaming.
+* Dont chage types from say string to int,but we can carefully try to handle datatype changes using union like changing a value you know was always a number but was written as string can be made to int using \["string","int"\].
+
+
+
