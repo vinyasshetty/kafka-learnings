@@ -16,28 +16,43 @@
 * Fields : This is a Array ,conatining below of below combinations:
 
   * Name  
-  * Type :Can have pritimive and/or complex types
+  * Type :Can have pritimive and/or complex types\(A JSON object defining a schema, or a JSON string naming a record definition \)
   * Doc
   * aliases : Array of strings which name used instead of Field Name
   * Defaults
 
-  `{`
-  `     "type": "record",`
-  `     "namespace": "com.example",`
-  `     "name": "customer",`
-  `     "doc": "this is some doc",`
-  `     "fields": [`
-  `       { "name": "first_name", "type": "string", "doc": "This is firstname" },`
-  `       { "name": "automated_email", "type": "boolean", "doc": "This is a boolean","default" : true },`
-  `       {"name" : "age","type":"int", "default": -1,doc : "This is age value"}`
-  `     ]  `
+  `{`  
+  `"type": "record",`  
+  `"namespace": "com.example",`  
+  `"name": "customer",`  
+  `"doc": "this is some doc",`  
+  `"fields": [`  
+  `{ "name": "first_name", "type": "string", "doc": "This is firstname" },`  
+  `{ "name": "automated_email", "type": "boolean", "doc": "This is a boolean","default" : true },`  
+  `{"name" : "age","type":"int", "default": -1,doc : "This is age value"}`  
+  `]`  
   `}`
 
 ## Avro Enum Schema
 
 * Enums are the ones where we have fixed set of values.Example :
-* 
-      
+* **Symbols needs to JSON List of Strings and has to be unique**
+
+`{`
+
+`	"type" : "enum",`
+
+`	"namespace" : ""`
+
+`	"name" : "sex",`
+
+`	"aliases" : ["Gender"]`
+
+`	"doc"  : "Determines the gender",`
+
+`	"symbols" : ["MALE","FEMALE","N/A"]`
+
+`}`
 
 
 
