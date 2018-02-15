@@ -4,23 +4,40 @@
 * This has NO delimiter
 * CSV\(No schema\) VS RDBMS\(Tough to move around data between systems,schema evolution possible but has limitations\) VS JSON\(NO Schema ie datatype check\) VS AVRO
 * Avro Primitive Types =&gt; null,int,long,boolean,float,double,string,bytes
-
-
+* Complex Types =&gt; Record ,Enum,Arrays,Map,Union,Calling other schemas as types.
 
 ## Avro Record Schemas:
 
+* **Type : "Record"**
 * Name :Name of the schema
 * Namespace : This is like package name
+* aliases : Array of strings which name used instead of Name
 * Doc :Documentation
-* Fields : This is a Array ,conatining below: 
+* Fields : This is a Array ,conatining below of below combinations:
 
-          +  Name  
+  * Name  
+  * Type :Can have pritimive and/or complex types
+  * Doc
+  * aliases : Array of strings which name used instead of Field Name
+  * Defaults
 
+  `{`
+  `     "type": "record",`
+  `     "namespace": "com.example",`
+  `     "name": "customer",`
+  `     "doc": "this is some doc",`
+  `     "fields": [`
+  `       { "name": "first_name", "type": "string", "doc": "This is firstname" },`
+  `       { "name": "automated_email", "type": "boolean", "doc": "This is a boolean","default" : true },`
+  `       {"name" : "age","type":"int", "default": -1,doc : "This is age value"}`
+  `     ]  `
+  `}`
 
+## Avro Enum Schema
 
-
-
-
+* Enums are the ones where we have fixed set of values.Example :
+* 
+      
 
 
 
