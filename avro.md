@@ -56,3 +56,19 @@
 
 `}`
 
+## Avro Array Schema 
+
+This is for collections of data.items signify the datatype.
+
+`{"type" : "array" , "items" : "string"}`
+
+
+
+## Avro Map Schema
+
+This is for key value pairs. Keys are always assumed to be String Type.
+
+`{"type" : "map" , "values"  : "string"}`
+
+
+
