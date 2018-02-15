@@ -94,61 +94,59 @@ Example Combined :
 
 `{`
 
-`	"type" : "record",`
+`"type" : "record",`
 
-`	"name" : "customer_info",`
+`"name" : "customer_info",`
 
-`	"namespace" : "com.pack",`
+`"namespace" : "com.pack",`
 
-`	"aliases" :["cust_info"],`
+`"aliases" :["cust_info"],`
 
-`	"fields" : [`
+`"fields" : [`
 
-`	        {"name" : "first_name","type" :"string","aliases": ["fname"]},`
+`{"name" : "first_name","type" :"string","aliases": ["fname"]},`
 
-`	        {"name" : "last_name","type" : ["null","string"],"default" : null},`
+`{"name" : "last_name","type" : ["null","string"],"default" : null},`
 
-`	        {"name" : "age" , "type" : "int","default":-1 },`
+`{"name" : "age" , "type" : "int","default":-1 },`
 
-`	        {"name" : "gender", "type" : "enum", "symbols" : ["MALE","FEMALE","N/A"]},`
+`{"name" : "gender", "type" : "enum", "symbols" : ["MALE","FEMALE","N/A"]},`
 
-`	        {"name" : "email", "type":"array","items" :"string" ,"default" : []},`
+`{"name" : "email", "type":"array","items" :"string" ,"default" : []},`
 
-`	        {"name" : "sec_quest" , "type" : "map", "values" : "string","default":{"No quest" : ""} },`
+`{"name" : "sec_quest" , "type" : "map", "values" : "string","default":{"No quest" : ""} },`
 
-`	        {"name" : "cust_address", "type" : "org.pack.cust_addr"}`
+`{"name" : "cust_address", "type" : "org.pack.cust_addr"}`
 
-`	]`
+`]`
 
 `},`
 
 `{`
 
-`	"type" : "record",`
+`"type" : "record",`
 
-`	"name" : "cust_addr",`
+`"name" : "cust_addr",`
 
-`	"namespace" : "com.pack",`
+`"namespace" : "com.pack",`
 
-`	"fields ": [`
+`"fields ": [`
 
-`	{"name" : "street" , "type" : "string"},`
+`{"name" : "street" , "type" : "string"},`
 
-`	{"name" : "city" ,"type": "string"},`
+`{"name" : "city" ,"type": "string"},`
 
-`	{"name" : "zip","type":"string"},`
+`{"name" : "zip","type":"string"},`
 
-`	{"name" : "staying" , "doc":"currently staying","type":"boolean","default":false}`
+`{"name" : "staying" , "doc":"currently staying","type":"boolean","default":false}`
 
-`	]`
+`]`
 
 ```
 }
 ```
 
 `]`
-
-
 
 **&lt;EDIT &gt; LOGICAL TYPES =&gt; logicalType :Additional info on exitsing primitive types.**Different types are decimals\(bytes\),date\(int\),time-millis\(long\),timestamp-millis\(long\)
 
