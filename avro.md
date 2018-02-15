@@ -20,6 +20,7 @@
   * Doc
   * aliases : Array of strings which name used instead of Field Name
   * Defaults
+  * Order** &lt;EDIT&gt; Need to understand more **
 
   `{`  
   `"type": "record",`  
@@ -36,23 +37,22 @@
 ## Avro Enum Schema
 
 * Enums are the ones where we have fixed set of values.Example :
-* **Symbols needs to JSON List of Strings and has to be unique**
+* **Symbols needs to JSON List of Strings and has to be unique.**
+* **Symbols once set cannot be changed,can cause breakage if symbols are changed.**
 
 `{`
 
-`	"type" : "enum",`
+`"type" : "enum",`
 
-`	"namespace" : ""`
+`"namespace" : ""`
 
-`	"name" : "sex",`
+`"name" : "sex",`
 
-`	"aliases" : ["Gender"]`
+`"aliases" : ["Gender"]`
 
-`	"doc"  : "Determines the gender",`
+`"doc"  : "Determines the gender",`
 
-`	"symbols" : ["MALE","FEMALE","N/A"]`
+`"symbols" : ["MALE","FEMALE","N/A"]`
 
 `}`
-
-
 
