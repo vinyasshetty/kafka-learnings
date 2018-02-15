@@ -56,19 +56,41 @@
 
 `}`
 
-## Avro Array Schema 
+## Avro Array Schema
 
 This is for collections of data.items signify the datatype.
 
 `{"type" : "array" , "items" : "string"}`
-
-
 
 ## Avro Map Schema
 
 This is for key value pairs. Keys are always assumed to be String Type.
 
 `{"type" : "map" , "values"  : "string"}`
+
+
+
+## Avro Union Schema
+
+This used to define default values. Represented as  \[  \]   . Example:
+
+\["string","int","long"\] 
+
+**This is mainly used in =&gt;  "type" : \["null","string"\], "default" : null. Now the default should always be of the type of the first union.**
+
+**Also you cannot have union within a union and Unions may not contain more than one schema with the same type, except for the named types record, fixed and enum.**
+
+**It also makes this Field as Optional**
+
+
+
+## Avro Fixed Type Schema
+
+size determines the number of bytes required,
+
+```
+{"type": "fixed", "size": 16, "name": "md5","namespace" : "","aliases" : ["name1","name2"]}
+```
 
 
 
