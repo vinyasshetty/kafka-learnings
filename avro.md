@@ -168,11 +168,9 @@ GitHub Link : &lt;EDIT&gt;
 * GenericDatumReader
 * DataFileReader
 
-
-
 SETTING DATA:
 
-If i dont set a mandatory field then it will throw a AvroRunTimeException error.But if i set a field which is not available in schema then it throws a NULLPOINTER EXCEPTION .These all are Runtime Exception.
+If i dont set a mandatory field\(ie types which are non-union\) then it will throw a AvroRunTimeException error.But if i set a field which is not available in schema then it throws a NULLPOINTER EXCEPTION .These all are Runtime Exception.
 
 GETTING DATA:
 
