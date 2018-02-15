@@ -150,13 +150,25 @@ Example Combined :
 
 **&lt;EDIT &gt; LOGICAL TYPES =&gt; logicalType :Additional info on exitsing primitive types.**Different types are decimals\(bytes\),date\(int\),time-millis\(long\),timestamp-millis\(long\)
 
-
-
-## **GenericRecord ** 
+## **GenericRecord **
 
 This is used to create avro objects from schema.Schema can be referenced from file or a string.
 
 GitHub Link : &lt;EDIT&gt;
+
+* Schema.Parser
+* Schema
+* GenericRecordBuilder
+* GenericData.Record
+* GenericRecord
+* DatumWriter
+* GenericDatumWriter
+* DataFileWriter
+* DatumReader
+* GenericDatumReader
+* DataFileReader
+
+
 
 SETTING DATA:
 
