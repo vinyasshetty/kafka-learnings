@@ -152,3 +152,17 @@ Example Combined :
 
 
 
+## **GenericRecord ** 
+
+This is used to create avro objects from schema.Schema can be referenced from file or a string.
+
+GitHub Link : &lt;EDIT&gt;
+
+SETTING DATA:
+
+If i dont set a mandatory field then it will throw a AvroRunTimeException error.But if i set a field which is not available in schema then it throws a NULLPOINTER EXCEPTION .These all are Runtime Exception.
+
+GETTING DATA:
+
+If you get a non existing column ,then u will get null.
+
