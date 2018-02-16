@@ -74,11 +74,11 @@ This used to define default values. Represented as  \[  \]   . Example:
 
 \["string","int","long"\]
 
-**This is mainly used in =&gt;  "type" : \["null","string"\], "default" : null. Now the default should always be of the type of the first union.When we have a union ,we always need to have default with it.**
+**This is mainly used in =&gt;  "type" : \["null","string"\], "default" : null. Now the default should always be of the type of the first union.When we have a union ,WE ALWAYS NEED TO HAVE DEFAULT WITH IT.**
 
 **Also you cannot have union within a union and Unions may not contain more than one schema with the same type, except for the named types record, fixed and enum.**
 
-**It also makes this Field as Optional**
+**It also makes this Field as Optional.**
 
 ## Avro Fixed Type Schema
 
@@ -170,19 +170,21 @@ GitHub Link : &lt;EDIT&gt;
 
 SETTING DATA:
 
-If i dont set a mandatory field\(ie types which are non-union\) then it will throw a AvroRunTimeException error.But if i set a field which is not available in schema then it throws a NULLPOINTER EXCEPTION .These all are Runtime Exception.
+If i dont set a mandatory field\(ie types which are non-union\) then it will throw a AvroRunTimeException error.But if i set a field which is not available in schema then it throws a NULLPOINTER EXCEPTION .**These all are Runtime Exception.If i set incorrect values agian this will be complained during runtime.**
 
 GETTING DATA:
 
 If you get a non existing column ,then u will get null.
 
-
-
 ### **Specific Record **
+
+If i dont set a mandatory field\(ie types which are non-union\) then it will throw a AvroRunTimeException error .I cannot set a field which is not available in schema ,**compiler will complain.Compiler will also Complain if I try to set incorrect value types.**
 
 If we try to access a column which has no default and which is mandatory then it will throw a ERROR unlike Generic.
 
-Schema Evolution works only when we have "defaults" ,fields without defaults but having union will still break.Union is just used while writing ie you dont have to write it specifically and it will put a 
+
+
+Schema Evolution works only when we have "defaults" ,fields without defaults but having union will still break.Union is just used while writing ie you dont have to write it specifically and it will put a
 
 * ## Suggestion While Creating Avro :
 * Make Primary fileds mandatory ie non union.
