@@ -174,13 +174,13 @@ If i dont set a mandatory field\(ie types which are non-union and DOES NOT have 
 
 GETTING DATA:
 
-If you get a non existing column ,then u will get null.
+If you get/query a non existing column ,then u will get null.
 
 ### **Specific Record **
 
 If i dont set a mandatory field\(ie types which are non-union\) then it will throw a AvroRunTimeException error .I cannot set a field which is not available in schema ,**compiler will complain.Compiler will also Complain if I try to set incorrect value types.**
 
-If we try to access a column which has no default and which is mandatory then it will throw a ERROR unlike Generic.
+If underlying data does NOT have this column and If we try to access this column which has no default in our avsc and which is mandatory then it will throw a ERROR unlike Generic.
 
 Schema Evolution works only when we have "defaults" ,fields without defaults but having union will still break.Union is just used while writing ie you dont have to write it specifically and it will put a
 
