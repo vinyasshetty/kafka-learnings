@@ -74,7 +74,7 @@ This used to define default values. Represented as  \[  \]   . Example:
 
 \["string","int","long"\]
 
-**This is mainly used in =&gt;  "type" : \["null","string"\], "default" : null. Now the default should always be of the type of the first union.**
+**This is mainly used in =&gt;  "type" : \["null","string"\], "default" : null. Now the default should always be of the type of the first union.When we have a union ,we always need to have default with it.**
 
 **Also you cannot have union within a union and Unions may not contain more than one schema with the same type, except for the named types record, fixed and enum.**
 
@@ -177,6 +177,12 @@ GETTING DATA:
 If you get a non existing column ,then u will get null.
 
 
+
+### **Specific Record **
+
+If we try to access a column which has no default and which is mandatory then it will throw a ERROR unlike Generic.
+
+Schema Evolution works only when we have "defaults" ,fields without defaults but having union will still break.Union is just used while writing ie you dont have to write it specifically and it will put a 
 
 * ## Suggestion While Creating Avro :
 * Make Primary fileds mandatory ie non union.
