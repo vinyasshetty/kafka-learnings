@@ -170,7 +170,7 @@ GitHub Link : &lt;EDIT&gt;
 
 SETTING DATA:
 
-If i dont set a mandatory field\(ie types which are non-union\) then it will throw a AvroRunTimeException error.But if i set a field which is not available in schema then it throws a NULLPOINTER EXCEPTION .**These all are Runtime Exception.If i set incorrect values agian this will be complained during runtime.**
+If i dont set a mandatory field\(ie types which are non-union and DOES NOT have a DEFAULT\) then it will throw a AvroRunTimeException error.But if i set a field which is not available in schema then it throws a NULLPOINTER EXCEPTION .**These all are Runtime Exception.If i set incorrect values agian this will be complained during runtime.**
 
 GETTING DATA:
 
@@ -181,8 +181,6 @@ If you get a non existing column ,then u will get null.
 If i dont set a mandatory field\(ie types which are non-union\) then it will throw a AvroRunTimeException error .I cannot set a field which is not available in schema ,**compiler will complain.Compiler will also Complain if I try to set incorrect value types.**
 
 If we try to access a column which has no default and which is mandatory then it will throw a ERROR unlike Generic.
-
-
 
 Schema Evolution works only when we have "defaults" ,fields without defaults but having union will still break.Union is just used while writing ie you dont have to write it specifically and it will put a
 
