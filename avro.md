@@ -182,7 +182,7 @@ If i dont set a mandatory field\(ie types which are non-union\) then it will thr
 
 If underlying data does NOT have this column and If we try to access this column which has no default in our avsc and which is mandatory then it will throw a ERROR unlike Generic.
 
-Schema Evolution works only when we have "defaults" ,fields without defaults but having union will still break.Union is just used while writing ie you dont have to write it specifically and it will put a
+Schema Evolution works only when we have "defaults" ,fields without defaults but having union will still break.
 
 * ## Suggestion While Creating Avro :
 * Make Primary fileds mandatory ie non union.
