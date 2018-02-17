@@ -191,5 +191,9 @@ Schema Evolution works only when we have "defaults" ,fields without defaults but
 * Aliases can be used for renaming.
 * Dont chage types from say string to int,but we can carefully try to handle datatype changes using union like changing a value you know was always a number but was written as string can be made to int using \["string","int"\].
 
+**Backward Compatbility : Data Was written in v1 schema but we will reading it with new/updated v2 schema and it should still work.**
+
+**Forward Compatibility : Data Was written in new v2 schema but it will be read using the old v1 schema and it should still be read.This a more common use case in Kafka where Usually Producer schema is updated but not all consumers schema is updated and they still continue to use the old schema.**
+
 
 
