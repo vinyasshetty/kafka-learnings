@@ -118,7 +118,7 @@ acks
 ## Consumer Configs
 
 * auto.offset.reset =&gt; earliest ,latest\(default\),none .If earliest is set then if we consumer belongs to a group id ie\(group.id is set\) even then it strats from beginning.none =&gt; will throw a error basically is group.id is NOT set.
-* group.id =&gt;   This will make the consumer part of a consumer group\(ie Name that you give\). This will basically create a offset topic which will keep track of your latest read partition offset.This feature loses relevance if auto.offset.rest is earliest.
+* group.id =&gt;   This will make the consumer part of a consumer group\(ie Name that you give\). This will basically create a offset topic which will keep track of your latest read partition offset.~~This feature loses relevance if auto.offset.reset is earliest.~~
 * fetch.min.bytes,fetch.max.bytes
 
  
