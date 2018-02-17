@@ -20,5 +20,7 @@
 
 * {"f1" : "value2"}  =&gt; Works
 
+* **We will have one Schema per Topic in Schema Registry and this can be evolved based on Avro Compatibility.In Schema Resgistry it will be named as &lt;topic\_name&gt;-value assuming the schema is for the value.**
+
 
 
