@@ -109,6 +109,8 @@ retention.ms and file.delete.delay.&lt;EDIT&gt;
 
 `bin /kafka-configs.sh --zookeeper localhost:2181 --entity-type topics --entity-name test2 --alter --delete -config  retention.ms`
 
+**Configurations pertinent to topics have both a server default as well an optional per-topic override. If no per-topic configuration is given the server default is used.**
+
 ## Producer Configs
 
 batch.size , linger.ms  ,buffer.memory,max.block.ms. &lt;EDIT&gt; Need to understand dependency.
