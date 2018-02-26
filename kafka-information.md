@@ -131,10 +131,12 @@ acks
 ## Zookeeper
 
 * Zookeeper holds metadata information about the broker,topics,partitions.
-* After you start zookeeper ,say nc localhost 2181 ,this will connect to zookeeper then say **srvr ,this is a 4 letter command for zoopkeeper which will give you details about the zookeeper.**
+* After you start zookeeper ,say "nc localhost 2181" ,this will connect to zookeeper then say **srvr ,this is a 4 letter command for zoopkeeper which will give you details about the zookeeper.**
 * Zookeeper cluster is called a **ensemble. **We usually select odd numbered ensemble like 3-node ensemble.This is called quorum.If we have 5 node ensemble then until 3 nodes are active zookeeper can still work ie Zookeeper ensemble works fine until maximum \# of nodes are active in that ensemble.
 * To build a zookeeper ensemble,we need to update below in zookeeper conf files ie :
-* All the conf files needs to have details about other zookeeper servers and also the myid file in dataDIr. &lt;EDIT&gt;
+* All the conf files needs to have details about other zookeeper servers and also the myid file in dataDIr. 
+* Create a configuration file. This file can be called anything\(In kafka provided zookeeper its called zookeeper.properties\). Use the following settings as a starting point:tickTime=2000 dataDir=/var/zookeeper/ clientPort=2181 initLimit=5 syncLimit=2 server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888.You can find the meanings of these and other configuration settings in the section [Configuration Parameters](https://zookeeper.apache.org/doc/r3.1.2/zookeeperAdmin.html#sc_configuration). A word though about a few here:Every machine that is part of the ZooKeeper ensemble should know about every other machine in the ensemble. You accomplish this with the series of lines of the form **server.id=host:port:port**. The parameters **host** and **port** are straightforward. You attribute the server id to each machine by creating a file named myid, one for each server, which resides in that server's data directory, as specified by the configuration file parameter **dataDir**. The myid file consists of a single line containing only the text of that machine's id. So myid of server 1 would contain the text "1" and nothing else. The id must be unique within the ensemble and should have a value between 1 and 255.
+
 * Zookeeper with kafka : It helps in selecting the controller broker, it has all the metadata info about the topics, information  about the broker health.
 
 
