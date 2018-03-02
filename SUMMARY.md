@@ -9,4 +9,5 @@
 * [Producer](producer.md)
 * [Avro](avro.md)
 * [Schema Registry](schema-registry.md)
+* [Consumer](consumer.md)
 
