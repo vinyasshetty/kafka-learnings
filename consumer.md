@@ -26,6 +26,7 @@
 * Now consumer will keeps polling and also internally keeps sending heartbeats based on heartbeat.interval.ms.Now if it does send a heartbeat or poll for a total of session.timeout.ms\(default is 3 seconds\) then GC will think this consumer is dead and it will rebalance.Also if a consumer is sending heartbeat but its not polling for a total of max.poll.interval.ms ,then also GC will consider consumer dead and rebalance.This is to avoid "livelock" situation
 * max.poll.records =&gt; per poll how max many records it can take,&lt;Question max.partition.fetch.bytes and max.poll.records which one takes preference??&gt;
 * auto.offset.reset=&gt;This property controls the behavior of the consumer when it starts reading a partition for which it doesn’t have a committed offset or if the committed offset it has is invalid \(usually because the consumer was down for so long that the record with that offset was already aged out of the broker\). The default is “latest,” which means that lacking a valid offset, the consumer will start reading from the newest records \(records that were written after the consumer started running\). The alternative is “earliest,” which means that lacking a valid offset, the consumer will read all the data in the partition, starting from the very beginning.
-* 
+* enable.auto.commit=&gt;This parameter controls whether the consumer will commit offsets automatically, and defaults to true. Set it to false if you prefer to control when offsets are committed, which is necessary to minimize duplicates and avoid missing data. If you set enable.auto.commit to true, then you might also want to control how frequently offsets will be committed using auto.commit.interval.ms.
+
 
 
