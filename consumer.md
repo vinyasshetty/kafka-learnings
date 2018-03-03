@@ -28,6 +28,7 @@
 * auto.offset.reset=&gt;This property controls the behavior of the consumer when it starts reading a partition for which it doesn’t have a committed offset or if the committed offset it has is invalid \(usually because the consumer was down for so long that the record with that offset was already aged out of the broker\). The default is “latest,” which means that lacking a valid offset, the consumer will start reading from the newest records \(records that were written after the consumer started running\). The alternative is “earliest,” which means that lacking a valid offset, the consumer will read all the data in the partition, starting from the very beginning.
 * enable.auto.commit=&gt;This parameter controls whether the consumer will commit offsets automatically, and defaults to true. Set it to false if you prefer to control when offsets are committed, which is necessary to minimize duplicates and avoid missing data. If you set enable.auto.commit to true, then you might also want to control how frequently offsets will be committed using auto.commit.interval.ms.
 * partition.assignment.strategy decides which partition goes to which consumer.Default is RoundRobin.See below
+* client.id can be any string,this is just to identify the consumer to the broker.&lt;Need to understand its usage&gt;??
 
 
 
@@ -38,8 +39,6 @@
 * In RangeAssignor, the topics and the consumers belonging to a group sent to the class and this one assigns a range of partitions to a consumer,say we have 5 partitions in a topic T1 and two consumers in consumer group g1 ,then first consumer will get 3 partitions and the last two partitions will go to the second consumer.
 * In RoundRobinAssignor ,say we have 5 partitions in a topic T1 and two consumers in consumer group g1 ,then first consumer will get p1,p3 ,p5 partitions and p2 and p4 to second consumer .
 * &lt;QUESTION&gt; : Read that assignment of consumer to partitions happens across topics in consecutive order in RoundRobinAssignor ,but assignment of partitions to a consumer is done by the consumer leader of that group,how does the consumer group know where the partition order stopped??
-
-
 
 
 
