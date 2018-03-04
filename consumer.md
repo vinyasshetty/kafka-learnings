@@ -59,6 +59,7 @@
 
 * Once the commitAsync\(\) method is done ie either it is succesful or it can fail then it will call a callback method.\(com.example.viny.Consumer2\)
 
-* 
+* We can combine sync and async methods in a consumer.We can have a commitSync at the finally part ie when the consumer is closing due to failure or rebalancing and use commitAsync otherwise.
+
 
 
