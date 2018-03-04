@@ -9,7 +9,7 @@
 * If a consumer does NOT send a heartbeat long enough then the group co-ordinator will decide that consumer is dead and retrigger a rebalancing.We can control the frequency of heartbeats and duration after which group co-ordinator decides that consumer is dead.
 * Consumer which wants to join a group sends a JoinGroup request to the GC\(Group Co-ordinator\) broker,the first consumer to join the group will be the leader and GC will send all ther consumers which info who want to join the group,then the leader consumer using a partitioing policy allocates partitions to the consumers and sends this info to the GC.Then GC sends only the required info a individual consumer saying from whicj partition they need to read from.ONly the GC and Consumer leader has the whole assignment list.This process will be done everytime when there is a rebalancing.&lt;Q**uestion** : So can the Consumer leader change everytime there is a rebalancing??&gt;
 * You will need a KafkaConumer object with properties ,mandatory properties key.deserializer,value.deserializer and bootstrap.servers.good to always give group.id ,this will determine the consumer group name.
-* A consumer can subsrcibe to multiple topics and we have a feature to use regular expression and whenever a new topic gets added ,then rebalancing will happen. The subscribe method has 3 overloaded types.
+* A consumer can subsrcibe to multiple topics and we have a feature to use regular expression and whenever a new topic gets added ,then rebalancing will happen. The subscribe method has 4 overloaded types.
 * Polling is the main method which controls co-ordinations heartbeats,rebalancing,fetching data,offset commit.
 * poll method takes a Long which determines for how long\(in ms\) consumer will block before fetching data .This will return a ConsumerRecords\[K,V\] object which is a List/Iterable where each element corresponds to a ConsumerRecord from each partition it has read/fetched data for a particular topic.
 * Always close the consumer ,this will amke sure if the consumer dies ,GC comes to know about it asap.
@@ -43,6 +43,8 @@
 * Kafka Consumers keeps track of the last message that they had read from partition.This process is called a "commit".
 * We will have a \_\_consumer\_offsets topics which will have the offset ie the last read message from each partition by the consumers.\_
 * Whenever a consumer rebalancing happens then the consumer wil go start reading the message based on the \_\__\_consumer\_offsets topic information,so here we can have potentially of duplicate message being read or some message being missed out to read if the offsets where not committed earlier._
+* There are 4 types of offsets per consumer group per partition, a\)last commited offset\(This is is the offset set in \_\__consumer\__offets topic, b\)Current Offsets : this is the offset from where the current reading is happening by consumer c\)High watermark Offset : This is the offset until which data has been replicated and is available for a consumer to read.d\)Log end offset : This is the total offset currently in the partition.
+
 * 
 
 
