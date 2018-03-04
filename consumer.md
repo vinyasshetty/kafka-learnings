@@ -12,14 +12,14 @@
 * A consumer can subsrcibe to multiple topics and we have a feature to use regular expression and whenever a new topic gets added ,then rebalancing will happen. The subscribe method has 4 overloaded types.
 * Polling is the main method which controls co-ordinations heartbeats,rebalancing,fetching data,offset commit.
 * poll method takes a Long which determines for how long\(in ms\) consumer will block before fetching data .This will return a ConsumerRecords\[K,V\] object which is a List/Iterable where each element corresponds to a ConsumerRecord from each partition it has read/fetched data for a particular topic.
-* Always close the consumer ,this will amke sure if the consumer dies ,GC comes to know about it asap.
+* Always close the consumer ,this will make sure if the consumer dies ,GC comes to know about it asap.
 * The poll loop does a lot more than just get data. The first time you call poll\(\) with a new consumer, it is responsible for finding the GroupCoordinator, joining the consumer group, and receiving a partition assignment. If a rebalance is triggered, it will be handled inside the poll loop as well. And of course the heartbeats that keep consumers alive are sent from within the poll loop. For this reason, we try to make sure that whatever processing we do between iterations is fast and efficient.
 * When a consumer does a poll for the first time is when it joins a group.
 * Rule is to have one thread or one application per consumer.Do NOT have multiple threads having consumer or multiple consumers in one thread. [https://www.confluent.io/blog/tutorial-getting-started-with-the-new-apache-kafka-0-9-consumer-client/](https://www.confluent.io/blog/tutorial-getting-started-with-the-new-apache-kafka-0-9-consumer-client/)
 
 ## Imp Properties
 
-* Most of them are good enough to be kep in default.
+* Most of them are good enough to be keep in default.
 * fetch.min.bytes =&gt; This will make the consumer to wait until it can fetch atleast this many bytes.This will reduce the two and forth movement of every small data.Look at cpu consumption of consumer and see if its very hgh when when very less data in topics then you can increase this value.
 * fetch.max.wait.ms =&gt; default is 500 ms,max wait time before fetching.If you set fetch.max.wait.ms to 100 ms and fetch.min.bytes to 1 MB, Kafka will recieve a fetch request from the consumer and will respond with data either when it has 1 MB of data to return or after 100 ms, whichever happens first.
 * max.partition.fetch.bytes =&gt; Default is 1MB.This is the maximum amout of bytes a consumer can read per partition.Remember when you a do a poll,it a returns a Iterable ConsumerRecords which has ConsumerRecord object per partition read by that Consumer.No assume we have 20 partitions and we have 5 consumers,then each consumer can read maximum of 4MB,this may be very less and we may have a possibility of consumers dying and also we need to make sure this is greater then max.message.bytes which detemines max size of a message in broker.Also we need to be careful not to make this too high,beacuse then we will need a lot of time to process it and delaying the poll.
@@ -43,7 +43,7 @@
 * Kafka Consumers keeps track of the last message that they had read from partition.This process is called a "commit".
 * We will have a \_\_consumer\_offsets topics which will have the offset ie the last read message from each partition by the consumers.\_
 * Whenever a consumer rebalancing happens then the consumer wil go start reading the message based on the \_\__\_consumer\_offsets topic information,so here we can have potentially of duplicate message being read or some message being missed out to read if the offsets where not committed earlier._
-* There are 4 types of offsets per consumer group per partition, a\)last commited offset\(This is is the offset set in \_\__consumer\__offets topic, b\)Current Offsets : this is the offset from where the current reading is happening by consumer c\)High watermark Offset : This is the offset until which data has been replicated and is available for a consumer to read.d\)Log end offset : This is the total offset currently in the partition.
+* There are 4 types of offsets per consumer group per partition, a\)last commited offset\(This is is the offset set in \_\_\_consumer\_\_offets topic, b\)Current Offsets : this is the offset from where the current reading is happening by consumer c\)High watermark Offset : This is the offset until which data has been replicated and is available for a consumer to read.d\)Log end offset : This is the total offset currently in the partition.
 
 * 
 
