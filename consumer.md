@@ -59,7 +59,7 @@
 
 * Once the commitAsync\(\) method is done ie either it is succesful or it can fail then it will call a callback method.\(com.example.viny.Consumer2\)
 
-* We can combine sync and async methods in a consumer.We can have a commitSync at the finally part ie when the consumer is closing due to failure or rebalancing and use commitAsync otherwise.
+* We can combine sync and async methods in a consumer.We can have a commitSync at the finally part ie when the consumer is closing due to failure or rebalancing and use commitAsync otherwise.**&lt;Question : When a rebalancing happens then a existing consumer does NOT go outside of the existing "loop",so combining like we did in \(com.example.viny.Consumer3\) is still suspectible to duplication???&gt;**
 
 
 
