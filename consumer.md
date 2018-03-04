@@ -53,7 +53,7 @@
 
 * To avoid this we can set auto.enable.commit to false and we can commit offset progrmatically at the place and time we want.
 
-* commitSync\(\) method helps is committing the** latest records that have been returned by poll method.**So make sure you call ** **this after all the processing is done in consumer.Also this method has the option if retrying and this is blocking ,this will either commit and the move ahead else it will retry and throw a error if it cant commit.Error : CommitFailedException \(com.example.viny.Consumer1\)
+* commitSync\(\) method helps is committing the** latest records that have been returned by poll method.**So make sure you call ** **this after all the processing is done in consumer.Also this method  will retry and this is blocking method call ,this will either commit and the move ahead else it will retry and if it still unable to commit the it will throw a error Error : CommitFailedException \(com.example.viny.Consumer1\)
 
 * 
 
