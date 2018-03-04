@@ -7,10 +7,10 @@
 * This process is called "rebalancing",during this time whole consumer group becomes unavailable ,so we need to be careful  about these rebalancing.
 * Consumers keep sending a regular heart beats to a consumer group co-ordinator broker.This may be different for different consumer group.It sends heart beat when it polls to get records and commits when it had read the message.
 * If a consumer does NOT send a heartbeat long enough then the group co-ordinator will decide that consumer is dead and retrigger a rebalancing.We can control the frequency of heartbeats and duration after which group co-ordinator decides that consumer is dead.
-* Consumer which wants to join a group sends a JoinGroup request to the GC\(Group Co-ordinator\) broker,the first consumer to join the group will be the leader and GC will send all ther consumers which info who want to join the group,then the leader consumer using a partitioing policy allocates partitions to the consumers and sends this info to the GC.Then GC sends only the required info a individual consumer saying from whicj partition they need to read from.ONly the GC and Consumer leader has the whole assignment list.This process will be done everytime when there is a rebalancing.&lt;Q**uestion** : So can the Consumer leader change everytime there is a relanacing??&gt;
+* Consumer which wants to join a group sends a JoinGroup request to the GC\(Group Co-ordinator\) broker,the first consumer to join the group will be the leader and GC will send all ther consumers which info who want to join the group,then the leader consumer using a partitioing policy allocates partitions to the consumers and sends this info to the GC.Then GC sends only the required info a individual consumer saying from whicj partition they need to read from.ONly the GC and Consumer leader has the whole assignment list.This process will be done everytime when there is a rebalancing.&lt;Q**uestion** : So can the Consumer leader change everytime there is a rebalancing??&gt;
 * You will need a KafkaConumer object with properties ,mandatory properties key.deserializer,value.deserializer and bootstrap.servers.good to always give group.id ,this will determine the consumer group name.
 * A consumer can subsrcibe to multiple topics and we have a feature to use regular expression and whenever a new topic gets added ,then rebalancing will happen. The subscribe method has 3 overloaded types.
-* Polling is the main method which controls co-ordinations heartbeats,rebalancing,fetching data.
+* Polling is the main method which controls co-ordinations heartbeats,rebalancing,fetching data,offset commit.
 * poll method takes a Long which determines for how long\(in ms\) consumer will block before fetching data .This will return a ConsumerRecords\[K,V\] object which is a List/Iterable where each element corresponds to a ConsumerRecord from each partition it has read/fetched data for a particular topic.
 * Always close the consumer ,this will amke sure if the consumer dies ,GC comes to know about it asap.
 * The poll loop does a lot more than just get data. The first time you call poll\(\) with a new consumer, it is responsible for finding the GroupCoordinator, joining the consumer group, and receiving a partition assignment. If a rebalance is triggered, it will be handled inside the poll loop as well. And of course the heartbeats that keep consumers alive are sent from within the poll loop. For this reason, we try to make sure that whatever processing we do between iterations is fast and efficient.
@@ -30,8 +30,6 @@
 * partition.assignment.strategy decides which partition goes to which consumer.Default is RoundRobin.See below
 * client.id can be any string,this is just to identify the consumer to the broker.&lt;Need to understand its usage&gt;??
 
-
-
 ## Partition Assignment to Consumer
 
 * Assignment of a partition to a consumer is done with a class called PartitionAssignor.
@@ -39,6 +37,14 @@
 * In RangeAssignor, the topics and the consumers belonging to a group sent to the class and this one assigns a range of partitions to a consumer,say we have 5 partitions in a topic T1 and two consumers in consumer group g1 ,then first consumer will get 3 partitions and the last two partitions will go to the second consumer.
 * In RoundRobinAssignor ,say we have 5 partitions in a topic T1 and two consumers in consumer group g1 ,then first consumer will get p1,p3 ,p5 partitions and p2 and p4 to second consumer .
 * &lt;QUESTION&gt; : Read that assignment of consumer to partitions happens across topics in consecutive order in RoundRobinAssignor ,but assignment of partitions to a consumer is done by the consumer leader of that group,how does the consumer group know where the partition order stopped??
+
+## Commit and Offset
+
+* Kafka Consumers keeps track of the last message that they had read from partition.This process is called a "commit".
+* We will have a \__\_\_consumer\_offsets topics which will have the offset ie the last read message from each partition by the consumers._
+* Whenever a consumer rebalancing happens then the consumer wil go start reading the message based on the \_\__\_consumer\_offsets topic information,so here we can have potentially of duplicate message being read or some message being missed out to read if the offsets where not committed earlier._
+* 
+
 
 
 
