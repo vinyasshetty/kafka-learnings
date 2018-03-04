@@ -55,6 +55,9 @@
 
 * commitSync\(\) method helps is committing the** latest records that have been returned by poll method.**So make sure you call ** **this after all the processing is done in consumer.Also this method  will retry and this is blocking method call ,this will either commit and the move ahead else it will retry and if it still unable to commit the it will throw a error Error : CommitFailedException \(com.example.viny.Consumer1\)
 
-* 
+* We can also do a asynchrnous commit ie a non-blocking commit.method is commitAsync\(\) . Now this is non blocking and also it will NOT retry .The reason it does not retry is that by the time commitAsync\(\) receives a response from the server, there may have been a later commit that was already successful. Imagine that we sent a request to commit offset 2000. There is a temporary communication problem, so the broker never gets the request and therefore never responds. Meanwhile, we processed another batch and successfully committed offset 3000. If commitAsync\(\) now retries the previously failed commit, it might succeed in committing offset 2000 after offset 3000 was already processed and committed. In the case of a rebalance, this will cause more duplicates.
+
+* Once the commitAsync\(\) method is done ie either it is succesful or it can fail then it will call a callback method.
+
 
 
