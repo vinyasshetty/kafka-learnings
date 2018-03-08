@@ -63,6 +63,8 @@
 
 * Now these above commit methods will commit directly the whole ConsumerRecords that have been read by the "poll",but we can further control this and we can explicitly commit offsets by sending a Map\[TopicPartition,OffsetAndMetadata =&gt; \(com.example.viny.Consumer4\) .
 
+&lt;HAVE TO COME BACK AND SEE HOW ONE CONSUMER READING FROM TWO TOPICS BEHAVE ON REBALANCING&gt;
+
 ## Rebalance Listeners
 
 
