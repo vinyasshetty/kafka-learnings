@@ -49,7 +49,7 @@
 
 * Hence _ making sure the offsets are commited correctly and regualarly becomes important._
 
-* As_ eveything else importanat,commiting offset also happens as a part of "polling"  ie if you have set enable.auto.commit to true,then wherever a polling happens ,it sees if it has been auto.commit.interval.ms then a the **last poll\(NOT the current\) **offset is committed.Now with this we may have a problem when a poll method is called and it has not be yet auto.commit.interval.ms  ,then a processing will continue and then before the next poll if a rebalancing triggers then last poll processed records are not committed to offset.This will cause duplication._
+* As_ eveything else important,commiting offset also happens as a part of "polling"  ie if you have set enable.auto.commit to true,then wherever a polling happens ,it sees if it has been auto.commit.interval.ms then a the **last poll\(NOT the current\) **offset is committed.Now with this we may have a problem when a poll method is called and it has not be yet auto.commit.interval.ms  ,then a processing will continue and then before the next poll if a rebalancing triggers then last poll processed records are not committed to offset.This will cause duplication._
 
 * To avoid this we can set auto.enable.commit to false and we can commit offset progrmatically at the place and time we want.
 
