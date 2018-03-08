@@ -63,11 +63,20 @@
 
 * Now these above commit methods will commit directly the whole ConsumerRecords that have been read by the "poll",but we can further control this and we can explicitly commit offsets by sending a Map\[TopicPartition,OffsetAndMetadata =&gt; \(com.example.viny.Consumer4\) .
 
-&lt;HAVE TO COME BACK AND SEE HOW ONE CONSUMER READING FROM TWO TOPICS BEHAVE ON REBALANCING&gt;
+**&lt;HAVE TO COME BACK AND SEE HOW ONE CONSUMER READING FROM TWO TOPICS BEHAVE ON REBALANCING&gt;**
 
 ## Rebalance Listeners
 
+To answer my above question as to how to do some activities before the rebalancing happens is answered by "Rebalance Listeners"
 
+So we need to have a class which extends ConsumerRebalanceListener and extends below two methods:
+
+```
+/*Below will be run it knows a reblanacing should happens but before it actually happes*/
+public void onPartitionsRevoked(Collections<TopicPartition> partitions) 
+//Below will happen after the rebalancing has happened but before the new consumer starts reading.
+public void onPartitionsAssigned(Collection<TopicPartition> partitions)
+```
 
 
 
