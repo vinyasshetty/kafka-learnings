@@ -78,5 +78,5 @@ public void onPartitionsRevoked(Collections<TopicPartition> partitions)
 public void onPartitionsAssigned(Collection<TopicPartition> partitions)
 ```
 
-
+Now the object that we create from class which extends ConsumerRebalanceListener needs to be passed in the subscribe method.
 
