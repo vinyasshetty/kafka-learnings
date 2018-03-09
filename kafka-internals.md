@@ -84,3 +84,5 @@ sh kafka-run-class.sh kafka.tools.DumpLogSegments --print-data-log --files /tmp/
 
 Kafka combines messages based on batch.size and linger.ms and send the batch together to broker.So make sure max.message.bytes is greater the batch.size.
 
+If a consumer wants to seek a message ie by giving a TopicPartition and a offset,then kafka needs to figure out from possible multiple segment file as to where the offset is,so for that reason kafka maintains a index file per segment which helps in easy determiming of a offset .
+
