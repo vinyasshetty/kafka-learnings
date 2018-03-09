@@ -82,3 +82,15 @@ Now the object that we create from class which extends ConsumerRebalanceListener
 
 We have a consumer.seek\(t:TopicPartition,offset:Long\) ,this will make the consumer to read from this given offset.
 
+
+
+We have seek method on consumer which will help us to start reading from the point you have given in the seek when the next poll comes. seek does NOT alter the last committed directly.
+
+consumer.seek\(t:TopicPartition, offset: Long\)
+
+Usually added at the "onPartitionAssigned" method in ConsumerRebalanceListener.
+
+
+
+
+
