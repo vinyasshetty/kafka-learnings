@@ -97,5 +97,5 @@ total 16
 Vinyass-MacBook-Pro:bin vinyasshetty$
 ```
 
-
+These indexes can be regenrated by itself using the segment log file.
 
