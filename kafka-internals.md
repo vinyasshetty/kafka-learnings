@@ -86,3 +86,16 @@ Kafka combines messages based on batch.size and linger.ms and send the batch tog
 
 If a consumer wants to seek a message ie by giving a TopicPartition and a offset,then kafka needs to figure out from possible multiple segment file as to where the offset is,so for that reason kafka maintains a index file per segment which helps in easy determiming of a offset .
 
+```
+cards is the topic name ,0 is the partition and logs.dir=/tmp/kafka-logs-1 in broker server.properties
+Vinyass-MacBook-Pro:bin vinyasshetty$ ls -l /tmp/kafka-logs-1/cards-0
+total 16
+-rw-r--r--  1 vinyasshetty  wheel  10485760 Mar  9 14:23 00000000000000000000.index
+-rw-r--r--  1 vinyasshetty  wheel       149 Mar  9 14:26 00000000000000000000.log
+-rw-r--r--  1 vinyasshetty  wheel  10485756 Mar  9 14:23 00000000000000000000.timeindex
+-rw-r--r--  1 vinyasshetty  wheel         8 Mar  9 14:25 leader-epoch-checkpoint
+Vinyass-MacBook-Pro:bin vinyasshetty$
+```
+
+
+
