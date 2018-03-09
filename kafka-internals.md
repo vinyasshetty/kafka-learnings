@@ -61,6 +61,26 @@ Say in log.dirs=/dev1/data1,/dev1/data2
 * Now if logs.dir has multiple directories,it choses the directories which least number of sub-directories.
 * Within a topic-partition directory kafka lets us write messages we send into a file which it calls a segment.Now this segment file can grow upto a maximum size\(log.segment.bytes\) or upto certain time\(log.segment.hours etc\).ONce either one of them reaches,it closes that segment and creates a new one.
 * **Once this segment closes ,then these files are eligible for clean up based on log.retention.bytes or log.retention.ms/etc.Important point to note here is these retention policies starts to apply once the file handle is closed,in other words "active segment" can never be deleted.**
-* 
+* We can mention the compression type if we want while writing data and while fetching no need to metion.
 
+* A message when its written ,below are some of the info:
+
+```
+Offset
+Magic
+Compression Codec
+Timestamp either set by the producer or broker sets it while writing
+Value Size
+Key Size
+Value
+Schema id ie if using Avro
+```
+
+Now we can view the contents of the segment file using command :
+
+```
+sh kafka-run-class.sh kafka.tools.DumpLogSegments --print-data-log --files /tmp/kafka-logs-1/cards-0/00000000000000000000.log  --deep-iteration
+```
+
+Kafka combines messages based on batch.size and linger.ms and send the batch together to broker.So make sure max.message.bytes is greater the batch.size.
 
