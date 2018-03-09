@@ -44,6 +44,10 @@ Also if you try to register a new broker with a same existing broker id,zookeepe
 * Clients can specify the min and max amount of data it can recieve\(look at consumer chapter fo configs to control this\)
 * **Can Producer also control amount of information it can send?**I know broker has max.message.bytes to say how much max information per message can it be.
 * If a client sends a fetch request for a topic or partition which does not exists,it will get a error.
+* **Consumers and Producers can only fetch and produce requests to leader brokers.**
+* **Consumers can only fetch data which has been replicated completly,this may cause consumers to wait until sync happens,but the delay can be limited by replica.lag.time.max.ms**
+
+
 
 
 
