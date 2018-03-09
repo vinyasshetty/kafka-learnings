@@ -42,12 +42,10 @@ Also if you try to register a new broker with a same existing broker id,zookeepe
 * During Producer request ,if acks=-1/all ,then once the leader gets the data ,it will store the ack request in a queue called "purgatory" untill all the followers are upto date.
 * Fetch : this is sent by consumer clients or by follower replias brokers.It will usually be a requests aksing data from multiple topics partitions offsets, like from topic t1 ,partition 0 ,offset 10, from topic t2 partition 1 offset 12 \(with assumption that this broker is the leader for these partitions\).
 * Clients can specify the min and max amount of data it can recieve\(look at consumer chapter fo configs to control this\)
-* **Can Producer also control amount of information it can send?**I know broker has max.message.bytes to say how much max information per message can it be.
+* **Can Producer also control amount of information it can send?\[**\[Answer : Well using linger.ms we can make the producer to fill its batch.size before sending the messages\]I know broker has max.message.bytes to say how much max information per message can it be.
 * If a client sends a fetch request for a topic or partition which does not exists,it will get a error.
 * **Consumers and Producers can only fetch and produce requests to leader brokers.**
 * **Consumers can only fetch data which has been replicated completly,this may cause consumers to wait until sync happens,but the delay can be limited by replica.lag.time.max.ms**
-
-
 
 
 
