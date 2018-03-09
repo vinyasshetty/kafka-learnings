@@ -30,7 +30,8 @@ Also if you try to register a new broker with a same existing broker id,zookeepe
 * So that means says i have 3 brokers ,then my partitions will be there until 2 brokers goes down.To provide this gurantee,the number of replication factor per partition that you can provide can be only upto to \(&lt;=\) Number of brokers.You cannot have two brokers and 3 replication factor for a partition/topic.
 * Every replica is classified into **leader** and** follower .**
 * leader keeps track of which all followers are in sync and out ofsync.Way it does this is each follower broker sends Fetch request to the leader same like how consumer does.it always asks the request in order ie if msg 1 and 2 is replicated only then it will ask for msg 3.This way the leader knows where the follower is based on its request.
-* Leader makes the follower to be out of sync if it does NOt send a fetch request in 10 seconds or if it sends a fetch request but its not update till the last offset .**followers which are out of sync will NOT be eligible to become leader if the leader broker goes down. **time after which a follower is considered out of sync as above is based on value **replica.lag.time.max.ms**
-
+* Leader makes the follower to be out of sync if it does NOt send a fetch request in 10 seconds or if it sends a fetch request but its not update till the last offset .
+* **followers which are out of sync will NOT be eligible to become leader if the leader broker goes down. **time after which a follower is considered out of sync as above is based on value **replica.lag.time.max.ms**
+* 
 
 
