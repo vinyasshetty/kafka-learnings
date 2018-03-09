@@ -1,3 +1,5 @@
+**Kafka is distributed , partitioned and replicated commit log/msg service.**
+
 Kafka runs on a Cluster.The nodes in the Cluster are called as Brokers.
 
 Data that you send or read from Kafka are called as "Messages".Each Message has a Key,Value and TimeStamp.
@@ -40,7 +42,7 @@ Client will interact only with the Leader Node for a given partition.
 
 We have something called as Consumer Group.These consists of Consumers.
 
-One Partition cannot be read by two or more consumers beloginging to a Consumer Group.This will avoid duplication in Consumer. 
+One Partition cannot be read by two or more consumers beloginging to a Consumer Group.This will avoid duplication in Consumer.
 
 The _offset_ is another bit of metadata—an integer value that continually increases—that Kafka adds to each message as it is produced. Each message in a given partition has a unique offset. By storing the offset of the **last consumed message for each partition**, either in Zookeeper or in Kafka itself, a consumer can stop and restart without losing its place.
 
