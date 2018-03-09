@@ -47,5 +47,29 @@ Also if you try to register a new broker with a same existing broker id,zookeepe
 * **Consumers and Producers can only fetch and produce requests to leader brokers.**
 * **Consumers can only fetch data which has been replicated completly,this may cause consumers to wait until sync happens,but the delay can be limited by replica.lag.time.max.ms**
 
+One Partition cannot be split be split between multiple broker.It needs to fit in one broker.
+
+```
+Say in log.dirs=/dev1/data1,/dev1/data2
+```
+
+Selection of a brokers when creating partitions for a topic .
+
+Say we have 6 brokers and we want a topic with 6 partitions and replication factor of 3.Now total number of partitions would be 18.
+
+Now is the leader of each partition selected.Lets randomly take broker 3 to be Leader partition 0, broker 4 to have Leader partition 1,broker 5 to have Leader partition 2 ,broker 0 to have Leader partition 3 and so on.
+
+Now for replicas,partition 0 has leader in broker 3,so partition 0 replicas will be broker 4 and 5.Similarly for partition 1, broker 4 was the leader so replicas will be broker 5 and broker 0.
+
+Was kafka is rack aware also,in that case say we have broker 0,1,2 in rack 0 and vroker 3,4,5 in rack 1 .then in terms of leader it will follow same process.But for replica . Seq order will 0,3,1,4,2,5.
+
+Now if logs.dir has multiple directories,it choses the directories which least number of sub-directories.
+
+Within a topic-partition directory kafka lets us write messages we send into a file which it calls a segment.Now this segment file can grow upto a maximum size\(log.segment.bytes\) or upto certain time\(log.segment.hours etc\).ONce either one of them reaches,it closes that segment and creates a new one.
+
+Once this segment closes ,then these files are eligible for clean up based on log.retention.bytes or log.retention.ms/etc.
+
+
+
 
 
