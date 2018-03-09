@@ -10,4 +10,5 @@
 * [Avro](avro.md)
 * [Schema Registry](schema-registry.md)
 * [Consumer](consumer.md)
+* [Kafka Internals](kafka-internals.md)
 
