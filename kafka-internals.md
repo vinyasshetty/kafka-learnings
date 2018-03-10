@@ -23,6 +23,7 @@ Also if you try to register a new broker with a same existing broker id,zookeepe
 * Now the controller broker keeps a watch on the "brokers/" znode information and whenever a broker goes down ,then it gets the list of all the partitions for which the broker was a leade**r\(how does it have this info??\) a**nd then based on where the repliacs are it will select a new broker and send that information the new leaders of the partitions and also its followers about this chnage.
 * Now the new leader brokers know that they need to server the consumer and producers for that partition and the follower broker know they should replicate the messages.
 * If a new broker is joining the cluster ,then the controller uses the new broker's broker id to see if there are replicas of any partitions and if it has then it notofies other broker who the are leader and followers of the partitions ,then this new broker will start replicating the partition from them.
+* Controller knows for every partition which is the leader broker and which brokers have sync replicas for that partition.
 
 ## Replication
 

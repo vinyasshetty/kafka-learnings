@@ -11,4 +11,5 @@
 * [Schema Registry](schema-registry.md)
 * [Consumer](consumer.md)
 * [Kafka Internals](kafka-internals.md)
+* [Kafka Connect](kafka-connect.md)
 
