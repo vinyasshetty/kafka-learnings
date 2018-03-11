@@ -10,6 +10,7 @@
 * [Avro](avro.md)
 * [Schema Registry](schema-registry.md)
 * [Consumer](consumer.md)
-* [Kafka Internals](kafka-internals.md)
+* [Kafka Internals -1](kafka-internals.md)
 * [Kafka Connect](kafka-connect.md)
+* [Kafka Internals -2](kafka-internals-2.md)
 
