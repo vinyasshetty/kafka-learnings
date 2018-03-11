@@ -13,6 +13,67 @@ zookeeper.connect=zoo1hostname:2181/kafka/,zoo2hostname:2181/kafka
 //zookeeper keeps track of which brokers are alive
 ```
 
+```
+cd /Users/vinyasshetty/Downloads/kafka_2.11-1.0.0/bin
+//Below will list the directories in root of zookeeper
+Vinyass-MacBook-Pro:bin vinyasshetty$ sh zookeeper-shell.sh 127.0.0.1:2181 ls /  
+[cluster, controller_epoch, controller, brokers, zookeeper, admin, isr_change_notification, consumers, log_dir_event_notification, latest_producer_id_block, config]
+ 
+ Vinyass-MacBook-Pro:bin vinyasshetty$ sh zookeeper-shell.sh 127.0.0.1:2181 ls /brokers
+ ** [ids, topics, seqid] **
+ 
+ Vinyass-MacBook-Pro:bin vinyasshetty$ sh zookeeper-shell.sh 127.0.0.1:2181 ls /brokers/ids 
+ [0,1]      /*Since i am running two brokers and This ephermal ie if connection of broker to zoopkeepr
+              goes away then the corresponding value(either 0 or 1) gets deleted*/
+ 
+ 
+ Vinyass-MacBook-Pro:bin vinyasshetty$ sh zookeeper-shell.sh  127.0.0.1:2181 get /brokers/topics/cards/partitions/1/state
+Connecting to 127.0.0.1:2181
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:None path:null
+{"controller_epoch":14,"leader":1,"version":1,"leader_epoch":5,"isr":[1,0]}
+cZxid = 0x7d4
+ctime = Fri Mar 09 14:23:49 CST 2018
+mZxid = 0x935
+mtime = Sun Mar 11 15:07:55 CDT 2018
+pZxid = 0x7d4
+cversion = 0
+dataVersion = 10
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 75
+numChildren = 0
+Vinyass-MacBook-Pro:bin vinyasshetty$ pwd
+/Users/vinyasshetty/Downloads/kafka_2.11-1.0.0/bin
+Vinyass-MacBook-Pro:bin vinyasshetty$ sh zookeeper-shell.sh 127.0.0.1:2181 get /brokers/ids/0
+Connecting to 127.0.0.1:2181
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:None path:null
+{"listener_security_protocol_map":{"PLAINTEXT":"PLAINTEXT"},"endpoints":["PLAINTEXT://192.168.1.125:9092"],"jmx_port":-1,"host":"192.168.1.125","timestamp":"1520798874231","port":9092,"version":4}
+cZxid = 0x91a
+ctime = Sun Mar 11 15:07:54 CDT 2018
+mZxid = 0x91a
+mtime = Sun Mar 11 15:07:54 CDT 2018
+pZxid = 0x91a
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x16216ad00c30001
+dataLength = 196
+numChildren = 0
+Vinyass-MacBook-Pro:bin vinyasshetty$
+ 
+ 
+     
+
+```
+
+
+
 Also if you try to register a new broker with a same existing broker id,zookeeper will complain.
 
 ## Controller
@@ -24,6 +85,16 @@ Also if you try to register a new broker with a same existing broker id,zookeepe
 * Now the new leader brokers know that they need to server the consumer and producers for that partition and the follower broker know they should replicate the messages.
 * If a new broker is joining the cluster ,then the controller uses the new broker's broker id to see if there are replicas of any partitions and if it has then it notofies other broker who the are leader and followers of the partitions ,then this new broker will start replicating the partition from them.
 * Controller knows for every partition which is the leader broker and which brokers have sync replicas for that partition.
+
+```
+Vinyass-MacBook-Pro:bin vinyasshetty$ sh zookeeper-shell.sh 127.0.0.1:2181 get /controller
+Connecting to 127.0.0.1:2181
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:None path:null
+{"version":1,"brokerid":1,"timestamp":"1520798869366"}
+```
 
 ## Replication
 
@@ -101,6 +172,17 @@ Vinyass-MacBook-Pro:bin vinyasshetty$
 
 These indexes can be regenrated by itself using the segment log file.
 
+```
+sh zookeeper-shell.sh 127.0.0.1:2181 get /brokers/topics/cards_1/partitions/1/state
+Connecting to 127.0.0.1:2181
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:None path:null
+{"controller_epoch":14,"leader":0,"version":1,"leader_epoch":0,"isr":[0,1]}
+/* So all the information related to a partition is available 
+```
+
 ## Compaction
 
 * Log Segment whose file handle has been closed ie no more messages are written to them are eligible for clean up.
@@ -112,10 +194,6 @@ These indexes can be regenrated by itself using the segment log file.
 * Kafka also supports one extra feature in compaction ie say if you send a msg with existing key with its value as null,the once compaction is done ,we will have the message with that key and value as null in the segment.This is called a **tombstone** or a **delete marker.Even if we send any future message with the same key and some value,after compaction the message where the key is null is retained.Now after the duration delete.retention.ms then the msg is deleted altogether.So any consumer planning to read from the beginning has to make sure he reads it before delete.retention.ms.**
 * So when does compaction run and how does it choose on which partition in the topic it has run on? Well compaction runs when the ratio of log head to log tail is greater or equal to **min.cleanable.dirty.ratio ** and whichever partition has higher ration it will run on them first.
 * ** Compaction works on topics that key and values if null key\(ie you dont pass any key \) then it will throw a error .**
-
-
-
-
 
 
 
