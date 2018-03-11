@@ -8,8 +8,8 @@ broker.id=1
 zookeeper.connect=zoo1hostname:2181/kafka/,zoo2hostname:2181/kafka
 
 //Zookeeper provides a lightweight distributed hierarchial filessytem. 
-//Now in kafka znodes we will end up having /kafka/brokers/1. By ephermal we mean if broker 
-//goes down for some reason then /kafka/brokers/1 this cleaned up in zookeeper.This is how 
+//Now in kafka znodes we will end up having /kafka/brokers/ids. By ephermal we mean if broker 
+//goes down for some reason then /kafka/brokers/ids this cleaned up in zookeeper.This is how 
 //zookeeper keeps track of which brokers are alive
 ```
 
@@ -112,6 +112,10 @@ These indexes can be regenrated by itself using the segment log file.
 * Kafka also supports one extra feature in compaction ie say if you send a msg with existing key with its value as null,the once compaction is done ,we will have the message with that key and value as null in the segment.This is called a **tombstone** or a **delete marker.Even if we send any future message with the same key and some value,after compaction the message where the key is null is retained.Now after the duration delete.retention.ms then the msg is deleted altogether.So any consumer planning to read from the beginning has to make sure he reads it before delete.retention.ms.**
 * So when does compaction run and how does it choose on which partition in the topic it has run on? Well compaction runs when the ratio of log head to log tail is greater or equal to **min.cleanable.dirty.ratio ** and whichever partition has higher ration it will run on them first.
 * ** Compaction works on topics that key and values if null key\(ie you dont pass any key \) then it will throw a error .**
+
+
+
+
 
 
 
