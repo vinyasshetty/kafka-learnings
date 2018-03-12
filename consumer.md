@@ -79,7 +79,7 @@ public void onPartitionsRevoked(Collections<TopicPartition> partitions)
 public void onPartitionsAssigned(Collection<TopicPartition> partitions)
 ```
 
-Now the object that we create from class which extends ConsumerRebalanceListener needs to be passed in the subscribe method.=&gt; \(com.example.viny.Consumer5\).Even when u restrat a Consumer ,it will go into above methods.
+Now the object that we create from class which extends ConsumerRebalanceListener needs to be passed in the subscribe method.=&gt; \(com.example.viny.Consumer5\).Even when u restart a Consumer ,it will go into above methods.
 
 We have a consumer.seek\(t:TopicPartition,offset:Long\) ,this will make the consumer to read from this given offset.
 
