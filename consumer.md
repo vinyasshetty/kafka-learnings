@@ -64,6 +64,8 @@
 
 * Now these above commit methods will commit directly the whole ConsumerRecords that have been read by the "poll",but we can further control this and we can explicitly commit offsets by sending a Map\[TopicPartition,OffsetAndMetadata =&gt; \(com.example.viny.Consumer4\) .
 
+* If a consumer is seeking for a offset which does NOt exist,then it will behave based on "auto.offset.reset" ,it does NOT throw a exception but if you try to get data from a topic which has does NOT have a particular partition then we get a exception ** java.lang.IllegalStateException: No current assignment for partition cards-12 **
+
 **&lt;HAVE TO COME BACK AND SEE HOW ONE CONSUMER READING FROM TWO TOPICS BEHAVE ON REBALANCING&gt;**
 
 ## Rebalance Listeners
