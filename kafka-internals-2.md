@@ -23,5 +23,7 @@ This parameter can be set only at broker level ie cluster level. =&gt; **unclean
 
 If all your replicas for a given partition are either out of sync and your leader broker goes down ,then based on paramter **unclean.leader.election.enable ,the out of sync replica will be selected as leader.This can cause data inconsistencies like what happens when some consumers has already read the latest message and some have not or a mixture of both.Now keep in mind that when the leader will come up again at that  the messages that only it had written  will get deleted and it will get in sync with the new leader offsets.**
 
-min.insync.replicas : broker and topic level
+** min.insync.replicas ** : broker and topic level config. If we have min.insync.replicas=2 and we have 3 replication factor ,then if we broker where we had two replicas goes down then the leader will NOT accept any messages from client and throws a **NotEnoughReplicasException** ,meanwhile consumers can still continue to read the messages.Now to overcome this we may have to restart the two brokers and wait until one of them have been replicated and in-sync.
+
+
 
