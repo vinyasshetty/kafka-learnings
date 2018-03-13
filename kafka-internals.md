@@ -135,8 +135,8 @@ Say in log.dirs=/dev1/data1,/dev1/data2
 Offset - 8 bytes
 msg length - 4 bytes
 CRC - 4 bytes
-magic byte - 1 byte
-attribute  - 1 byte
+magic byte - 1 byte // this has the version from kafka general message they just have version 0 and 1.
+attribute  - 1 byte // tells whether compressed or not
 timestamp - 8 bytes
 key length - 4 bytes
 key content - varies
