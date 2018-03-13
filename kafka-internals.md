@@ -18,15 +18,15 @@ cd /Users/vinyasshetty/Downloads/kafka_2.11-1.0.0/bin
 //Below will list the directories in root of zookeeper
 Vinyass-MacBook-Pro:bin vinyasshetty$ sh zookeeper-shell.sh 127.0.0.1:2181 ls /  
 [cluster, controller_epoch, controller, brokers, zookeeper, admin, isr_change_notification, consumers, log_dir_event_notification, latest_producer_id_block, config]
- 
+
  Vinyass-MacBook-Pro:bin vinyasshetty$ sh zookeeper-shell.sh 127.0.0.1:2181 ls /brokers
  ** [ids, topics, seqid] **
- 
+
  Vinyass-MacBook-Pro:bin vinyasshetty$ sh zookeeper-shell.sh 127.0.0.1:2181 ls /brokers/ids 
  [0,1]      /*Since i am running two brokers and This ephermal ie if connection of broker to zoopkeepr
               goes away then the corresponding value(either 0 or 1) gets deleted*/
- 
- 
+
+
  Vinyass-MacBook-Pro:bin vinyasshetty$ sh zookeeper-shell.sh  127.0.0.1:2181 get /brokers/topics/cards/partitions/1/state
 Connecting to 127.0.0.1:2181
 
@@ -66,13 +66,7 @@ ephemeralOwner = 0x16216ad00c30001
 dataLength = 196
 numChildren = 0
 Vinyass-MacBook-Pro:bin vinyasshetty$
- 
- 
-     
-
 ```
-
-
 
 Also if you try to register a new broker with a same existing broker id,zookeeper will complain.
 
@@ -138,15 +132,16 @@ Say in log.dirs=/dev1/data1,/dev1/data2
 * A message when its written ,below are some of the info:
 
 ```
-Offset
-Magic
-Compression Codec
-Timestamp either set by the producer or broker sets it while writing
-Value Size
-Key Size
-Value
-CheckSum
-Schema id ie if using Avro
+Offset - 8 bytes
+msg length - 4 bytes
+CRC - 4 bytes
+magic byte - 1 byte
+attribute  - 1 byte
+timestamp - 8 bytes
+key length - 4 bytes
+key content - varies
+value length - 4 bytes
+value content - varies
 ```
 
 Now we can view the contents of the segment file using command :
@@ -180,7 +175,7 @@ WATCHER::
 
 WatchedEvent state:SyncConnected type:None path:null
 {"controller_epoch":14,"leader":0,"version":1,"leader_epoch":0,"isr":[0,1]}
-/* So all the information related to a partition is available 
+/* So all the information related to a partition is available
 ```
 
 ## Compaction
