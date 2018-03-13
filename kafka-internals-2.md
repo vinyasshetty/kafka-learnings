@@ -27,3 +27,13 @@ If all your replicas for a given partition are either out of sync and your leade
 
 
 
+## **Mission Critical Data :**
+
+* unclean.leader.election.enable=false
+* min.insync.replicas=2
+* acks=all
+* replication.factor=3
+* Handle Producer error correctly.Use retries.
+
+
+
