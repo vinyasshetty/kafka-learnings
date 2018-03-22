@@ -66,7 +66,7 @@
   | Retries | No retries |
   | Either will succeed of fail | SInce non blocking it just continues but you can have a callback |
   | It can take a Map\[TopicPartition,OffsetAndMetadata\] for controlled commit | It can take a Map\[TopicPartition,OffsetAndMetadata\] for controlled commit.This can work with or without callback |
-* We can combine sync and async methods in a consumer.We can have a commitSync at the finally part ie when the consumer is closing due to failure or rebalancing and use commitAsync otherwise.**&lt;Question : When a rebalancing happens then a existing consumer does NOT go outside of the existing "loop",so combining like we did in \(com.example.viny.Consumer3\) is still suspectible to duplication???&gt;.**
+* We can combine sync and async methods in a consumer.We can have a commitSync at the finally part ie when the consumer is closing due to failure or rebalancing\(see below Rebalance Listeners\) and use commitAsync otherwise.
 
 * Now these above commit methods will commit directly the whole ConsumerRecords that have been read by the "poll",but we can further control this and we can explicitly commit offsets by sending a Map\[TopicPartition,OffsetAndMetadata =&gt; \(com.example.viny.Consumer4\) .
 
