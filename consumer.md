@@ -12,7 +12,7 @@
 * A consumer can subsrcibe to multiple topics and we have a feature to use regular expression and whenever a new topic gets added ,then rebalancing will happen. The subscribe method has 4 overloaded types.
 * Polling is the main method which controls **co-ordinations heartbeats,rebalancing,fetching data,offset commit.**
 * poll method takes a Long which determines for **how long\(in ms\) consumer will block if the consumer buffer is empty** .This will return a ConsumerRecords\[K,V\] object which is a List/Iterable where each element corresponds to a ConsumerRecord from each partition it has read/fetched data for a particular topic.
-* Always close the consumer ,this will make sure if the consumer dies ,GC comes to know about it asap.
+* **Always close the consumer** ,this will make sure if the consumer dies ,GC comes to know about it asap.Also it will do a offset commit \(It will commit the last offset only when enable.auto.commit is set to true\)
 * The poll loop does a lot more than just get data. The first time you call poll\(\) with a new consumer, it is responsible for finding the GroupCoordinator, joining the consumer group, and receiving a partition assignment. If a rebalance is triggered, it will be handled inside the poll loop as well. And of course the heartbeats that keep consumers alive are sent from within the poll loop. For this reason, we try to make sure that whatever processing we do between iterations is fast and efficient.
 * When a consumer does a poll for the first time is when it joins a group.
 * Rule is to have one thread or one application per consumer.Do NOT have multiple threads having consumer or multiple consumers in one thread. [https://www.confluent.io/blog/tutorial-getting-started-with-the-new-apache-kafka-0-9-consumer-client/](https://www.confluent.io/blog/tutorial-getting-started-with-the-new-apache-kafka-0-9-consumer-client/)
@@ -42,7 +42,7 @@
 ## Commit and Offset
 
 * Kafka Consumers keeps track of the last message that they had read from partition.This process is called a "commit".
-* We will have a \__consumer\_offsets topics which will have the offset ie the last read message from each partition by the consumers. This \__\_consumer\_offsets is not used to read if reblanacing is not occuring.\_
+* We will have a \__consumer\_offsets topics which will have the offset ie the last read message from each partition by the consumers. This \_\_\_consumer\_offsets is not used to read if reblanacing is not occuring.\_
 * Whenever a consumer rebalancing happens then the consumer wil go start reading the message based on the \_\__\_consumer\_offsets topic information,so here we can have potentially of duplicate message being read or some message being missed out to read if the offsets where not committed earlier._
 * There are 4 types of offsets per consumer group per partition, a\)last commited offset\(This is is the offset committed in \_\_\_consumer\_\_offets topic, b\)Current Offsets : this is the offset from where the current reading is happening by consumer c\)High watermark Offset : This is the offset until which data has been replicated and is available for a consumer to read.d\)Log end offset : This is the total offset currently in the partition.
 
