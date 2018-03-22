@@ -42,7 +42,7 @@
 ## Commit and Offset
 
 * Kafka Consumers keeps track of the last message that they had read from partition.This process is called a "commit".
-* We will have a \_\_consumer\_offsets topics which will have the offset ie the last read message from each partition by the consumers.\_
+* We will have a \__consumer\_offsets topics which will have the offset ie the last read message from each partition by the consumers. This \_\_consumer\_offsets is not used to read if reblanacing is not occuring._
 * Whenever a consumer rebalancing happens then the consumer wil go start reading the message based on the \_\__\_consumer\_offsets topic information,so here we can have potentially of duplicate message being read or some message being missed out to read if the offsets where not committed earlier._
 * There are 4 types of offsets per consumer group per partition, a\)last commited offset\(This is is the offset committed in \_\_\_consumer\_\_offets topic, b\)Current Offsets : this is the offset from where the current reading is happening by consumer c\)High watermark Offset : This is the offset until which data has been replicated and is available for a consumer to read.d\)Log end offset : This is the total offset currently in the partition.
 
