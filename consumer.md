@@ -37,7 +37,7 @@
 * This class is extended by two classes : org.apache.kafka.clients.consumer.RangeAssignor and org.apache.kafka.clients.consumer.RoundRobinAssignor.
 * In RangeAssignor, the topics and the consumers belonging to a group sent to the class and this one assigns a range of partitions to a consumer,say we have 5 partitions in a topic T1 and two consumers in consumer group g1 ,then first consumer will get 3 partitions and the last two partitions will go to the second consumer.
 * In RoundRobinAssignor ,say we have 5 partitions in a topic T1 and two consumers in consumer group g1 ,then first consumer will get p1,p3 ,p5 partitions and p2 and p4 to second consumer .
-* &lt;QUESTION&gt; : Read that assignment of consumer to partitions happens across topics in consecutive order in RoundRobinAssignor ,but assignment of partitions to a consumer is done by the consumer leader of that group,how does the consumer group know where the partition order stopped??
+* ~~&lt;QUESTION&gt; : Read that assignment of consumer to partitions happens across topics in consecutive order in RoundRobinAssignor ,but assignment of partitions to a consumer is done by the consumer leader of that group,how does the consumer group know where the partition order stopped??~~
 
 ## Commit and Offset
 
@@ -54,12 +54,17 @@
 
 * To avoid this we can set auto.enable.commit to false and we can commit offset progrmatically at the place and time we want.
 
-* commitSync\(\) method helps is committing the** latest records that have been returned by poll method.**So make sure you call ** **this after all the processing is done in consumer.Also this method  will retry and this is blocking method call ,this will either commit and the move ahead else it will retry and if it still unable to commit the it will throw a error Error : CommitFailedException \(com.example.viny.Consumer1\)
+* commitSync\(\) method helps is committing the** latest records that have been returned by poll method.**So make sure you call ** **this after all the processing is done in consumer.**Also this method  will retry and this is blocking method call ,this will either commit and the move ahead else it will retry and if it still unable to commit the it will throw a error Error : CommitFailedException \(com.example.viny.Consumer1\)**
 
 * We can also do a asynchrnous commit ie a non-blocking commit.method is commitAsync\(\) . Now this is non blocking and also it will NOT retry .The reason it does not retry is that by the time commitAsync\(\) receives a response from the server, there may have been a later commit that was already successful. Imagine that we sent a request to commit offset 2000. There is a temporary communication problem, so the broker never gets the request and therefore never responds. Meanwhile, we processed another batch and successfully committed offset 3000. If commitAsync\(\) now retries the previously failed commit, it might succeed in committing offset 2000 after offset 3000 was already processed and committed. In the case of a rebalance, this will cause more duplicates.
 
 * Once the commitAsync\(\) method is done ie either it is succesful or it can fail then it will call a callback method.\(com.example.viny.Consumer2\)
 
+* | commitSync | commitAsync |
+  | :--- | :--- |
+  | Blocking | NonBlocking |
+  | Retries | No retries |
+  | Either will succeed of fail | SInce non blocking it just continues but you can have a callback |
 * We can combine sync and async methods in a consumer.We can have a commitSync at the finally part ie when the consumer is closing due to failure or rebalancing and use commitAsync otherwise.**&lt;Question : When a rebalancing happens then a existing consumer does NOT go outside of the existing "loop",so combining like we did in \(com.example.viny.Consumer3\) is still suspectible to duplication???&gt;.**
 
 * Now these above commit methods will commit directly the whole ConsumerRecords that have been read by the "poll",but we can further control this and we can explicitly commit offsets by sending a Map\[TopicPartition,OffsetAndMetadata =&gt; \(com.example.viny.Consumer4\) .
