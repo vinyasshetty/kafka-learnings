@@ -138,7 +138,7 @@ acks
 * After you start zookeeper ,say "nc localhost 2181" ,this will connect to zookeeper then say **srvr ,this is a 4 letter command for zoopkeeper which will give you details about the zookeeper.**
 * Zookeeper cluster is called a **ensemble. **We usually select odd numbered ensemble like 3-node ensemble.This is called quorum.If we have 5 node ensemble then until 3 nodes are active zookeeper can still work ie Zookeeper ensemble works fine until maximum \# of nodes are active in that ensemble.
 * To build a zookeeper ensemble,we need to update below in zookeeper conf files ie :
-* All the conf files needs to have details about other zookeeper servers and also the myid file in dataDIr. 
+* All the conf files needs to have details about other zookeeper servers and also the myid file in dataDir. 
 * Create a configuration file. This file can be called anything\(In kafka provided zookeeper its called zookeeper.properties\). Use the following settings as a starting point:
 
 ```
