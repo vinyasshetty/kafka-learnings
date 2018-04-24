@@ -10,8 +10,6 @@ bin/kafka-server-start.sh config/server\_1.properties
 
 bin/kafka-server-start.sh config/server.properties
 
-
-
 For us to set up via docker .Set up Docker first.
 
 Then on Terminal:
@@ -88,7 +86,7 @@ Below will let you read data from Kafka Topic.Below command will not read anythi
 
 `kafka-console-consumer --bootstrap-server 127.0.0.1:9092 --topic test1`
 
-Too Read from begining :
+To Read from begining :
 
 `kafka-console-consumer --bootstrap-server 127.0.0.1:9092 --topic test1  --from-beginning`
 
