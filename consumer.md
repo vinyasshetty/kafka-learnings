@@ -1,4 +1,4 @@
-## Consumer
+## nConsumer
 
 * Maximum number of consumers you can have in a consumer groups should be equal to the number of partitions of a given topic.
 * In other words, one partition cannot send data to more then one consumer within a consumer group.But we can have multiple partition sending data to one consumer within a consumer group.
@@ -7,7 +7,7 @@
 * This process is called **"rebalancing"**,during this time whole consumer group becomes unavailable ,so we need to be careful  about these rebalancing.This will occur anytime when there is a change in the consumer count within a consumer group\(may be due existing consumers crashing or user adding new consumers\) or when new partitions or new topics gets added which are subscribed by running consumers.So in simple teams when ownership of partitions changes for a consumer .
 * Consumers keep sending a regular heart beats to a consumer group co-ordinator broker.This may be different for different consumer group.It sends heart beat when it polls to get records and commits when it had read the message.
 * If a consumer does NOT send a heartbeat long enough then the group co-ordinator will decide that consumer is dead and retrigger a rebalancing.We can control the frequency of heartbeats and duration after which group co-ordinator decides that consumer is dead.
-* Consumer which wants to join a group sends a JoinGroup request to the GC\(Group Co-ordinator\) broker,the first consumer to join the group will be the leader and GC will send all ther consumers which info who want to join the group,then the leader consumer using a partitioing policy allocates partitions to the consumers and sends this info to the GC.Then GC sends only the required info a individual consumer saying from which partition they need to read from.ONly the GC and Consumer leader has the whole assignment list.This process will be done everytime when there is a rebalancing.&lt;**Question : So can the Consumer leader change everytime there is a rebalancing??&gt;**
+* Consumer which wants to join a group sends a JoinGroup request to the GC\(Group Co-ordinator\) broker,the first consumer to join the group will be the leader and GC will send all ther consumers which info who want to join the group,then the leader consumer using a partitioing policy allocates partitions to the consumers and sends this info to the GC.Then GC sends only the required info a individual consumer saying from which partition they need to read from.Only the GC and Consumer leader has the whole assignment list.This process will be done everytime when there is a rebalancing.&lt;**Question : So can the Consumer leader change everytime there is a rebalancing??&gt;**
 * You will need a KafkaConumer object with properties ,mandatory properties key.deserializer,value.deserializer and bootstrap.servers.good to always give group.id ,this will determine the consumer group name.
 * A consumer can subsrcibe to multiple topics and we have a feature to use regular expression and whenever a new topic gets added ,then rebalancing will happen. The subscribe method has 4 overloaded types.
 * Polling is the main method which controls **co-ordinations heartbeats,rebalancing,fetching data,offset commit.**
@@ -28,7 +28,7 @@
 * max.poll.records =&gt; per poll how max many records it can take,&lt;Question max.partition.fetch.bytes and max.poll.records which one takes preference??&gt;
 * auto.offset.reset=&gt;This property controls the behavior of the consumer when it starts reading a partition for which it doesn’t have a committed offset or if the committed offset it has is invalid \(usually because the consumer was down for so long that the record with that offset was already aged out of the broker\). The default is “latest,” which means that lacking a valid offset, the consumer will start reading from the newest records \(records that were written after the consumer started running\). The alternative is “earliest,” which means that lacking a valid offset, the consumer will read all the data in the partition, starting from the very beginning.
 * enable.auto.commit=&gt;This parameter controls whether the consumer will commit offsets automatically, and defaults to true. Set it to false if you prefer to control when offsets are committed, which is necessary to minimize duplicates and avoid missing data. If you set enable.auto.commit to true, then you might also want to control how frequently offsets will be committed using auto.commit.interval.ms.
-* partition.assignment.strategy decides which partition goes to which consumer.Default is RoundRobin.See below
+* partition.assignment.strategy decides which partition goes to which consumer.**Default is RoundRobin.**See below
 * client.id can be any string,this is just to identify the consumer to the broker.&lt;Need to understand its usage&gt;??
 
 ## Partition Assignment to Consumer
@@ -44,7 +44,7 @@
 * Kafka Consumers keeps track of the last message that they had read from partition.This process is called a "commit".
 * We will have a \__consumer\_offsets topics which will have the offset ie the last read message from each partition by the consumers. This \_\_\_consumer\_offsets is not used to read if reblanacing is not occuring.\_
 * Whenever a consumer rebalancing happens then the consumer wil go start reading the message based on the \_\__\_consumer\_offsets topic information,so here we can have potentially of duplicate message being read or some message being missed out to read if the offsets where not committed earlier._
-* **There are 4 types of offsets per consumer group per partition,** a\)last commited offset\(This is is the offset committed in \_\_\_consumer\_\_offets topic, b\)Current Offsets : this is the offset from where the current reading is happening by consumer c\)High watermark Offset : This is the offset until which data has been replicated and is available for a consumer to read.d\)Log end offset : This is the total offset currently in the partition.
+* **There are 4 types of offsets per consumer group per partition,** a\)**last commited offset\(**This is is the offset committed in \_\_\_consumer\_\_offets topic, b\)**Current Offsets **: this is the offset from where the current reading is happening by consumer c\)**High watermark Offset **: This is the offset until which data has been replicated and is available for a consumer to read.d\)**Log end offset** : This is the total offset currently in the partition.
 
 * Commiting of offsets to \_\__\_consumer\_offsets becomes important when rebalancing occurs ,because when a rebalancing happens ,all the consumers stops and gets thier partitions assigned ,now they will go and read from committed offsets to decide from where they need to start reading.So if the last committed offsets are done not correctly and is behind then it may cause duplication processing of data or if the last committed offset is ahead the consumer will miss reading some messages._
 
@@ -52,7 +52,7 @@
 
 * As_ eveything else important,commiting offset also happens as a part of "polling"  ie if you have set enable.auto.commit to true,then wherever a polling happens ,it sees if it has been **auto.commit.interval.ms** then a the **last poll\(NOT the current\) **offset is committed.Now with this we may have a problem when a poll method is called and it has not be yet auto.commit.interval.ms  ,then a processing will continue and then before the next poll if a rebalancing triggers then last poll processed records are not committed to offset.This will cause duplication._
 
-* To avoid this we can set auto.enable.commit to false and we can commit offset progrmatically at the place and time we want.
+* To avoid this we can set auto.enable.commit to false and we can commit offset programatically at the place and time we want.
 
 * commitSync\(\) method helps is committing the** latest records that have been returned by poll method.**So make sure you call ** **this after all the processing is done in consumer.**Also this method  will retry and this is blocking method call ,this will either commit and the move ahead else it will retry and if it still unable to commit the it will throw a error Error : CommitFailedException \(com.example.viny.Consumer1\)**
 
