@@ -1,4 +1,4 @@
-## nConsumer
+## Consumer
 
 * Maximum number of consumers you can have in a consumer groups should be equal to the number of partitions of a given topic.
 * In other words, one partition cannot send data to more then one consumer within a consumer group.But we can have multiple partition sending data to one consumer within a consumer group.
